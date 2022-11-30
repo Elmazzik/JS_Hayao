@@ -13,15 +13,26 @@ router.get("/:nick", function(req, res, next) {
 
 /* Страница героев */
 router.get('/:nick', function(req, res, next) {
-    Cat.findOne({nick:req.params.nick}, function(err,cat){
-        if(err) return next(err)
-        if(!cat) return next(new Error("Нет такого аниме на этой странице"))
-        res.render('hayao', {
-            title: hayao.title,
-            picture: hayao.avatar,
-            desc: hayao.desc
-        })
-    })
+  async.parallel([
+          function(callback){
+            hayao.findOne({nick:req.params.nick}, callback)
+          },
+          function(callback){
+            hayao.find({},{_id:0,title:1,nick:1},callback)
+          }
+      ],
+      function(err,result){
+          if(err) return next(err)
+          var hayao = result[0]
+          var anime = result[1] || []
+          if(!planet) return next(new Error("Нет такого аниме на странице"))
+          res.render('hayao', {
+              title: hayao.title,
+              picture: hayao.avatar,
+              desc: hayao.desc,
+              menu: hayao
+          });
+      })
 })
 
 module.exports = router;
