@@ -1,15 +1,14 @@
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/')
+mongoose.connect('mongodb://127.0.0.1:27017/test1')
 
-var schema = mongoose.Schema({ name: String })
+var hayao = require("./models/hayao").hayao
 
-schema.methods.film = function(){
-    console.log(this.get("name") + " сказал что-то")
-}
+var hayao = new hayao({
+title: "Ходячий замок",
+nick: "castle"
+})
 
-var hayao = mongoose.model('hayao', schema)
-
-var anime = new hayao({ name: 'Spirited' })
-anime.save(function (err) {
-    anime.film()
+console.log(hayao)
+hayao.save(function(err, hayao, affected){
+    console.log(hayao.title)
 })
