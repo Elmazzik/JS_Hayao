@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var Hayao = require("../models/hayao").Hayao
+
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  Hayao.find({}, { _id: 0, title: 1, nick: 1 }, function (err, menu) {
-    res.render('index', { title: 'Express', menu: menu, counter: req.session.counter });
-  })
+router.get('/', function(req, res, next) {
+    res.render('index', { title: 'Express', counter: req.session.counter });
 });
 
 // /* GET home page. */

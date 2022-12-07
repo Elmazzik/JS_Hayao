@@ -14,6 +14,8 @@ var cit = require('./routes/hayao');
 var app = express();
 
 // view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 app.engine('ejs',require('ejs-locals'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -23,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public', 'images')));
 
 var MongoStore = require('connect-mongo');
 app.use(session({
@@ -38,13 +41,7 @@ app.use(function(req,res,next){
     next()
 })
 
-
-app.use(session({
-  secret: "Hayao",
-  cookie:{maxAge: 60*1000 },
-  resave: true,
-  saveUninitialized: true	
-}))
+app.use(require("./middleware/createMenu.js"))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
