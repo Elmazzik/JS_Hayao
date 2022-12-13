@@ -13,6 +13,12 @@ router.get('/logreg', function(req, res, next) {
 res.render('logreg',{title: 'Вход'});
 });
 
+/* POST login/registration page. */
+router.post('/logreg', function(req, res, next) {
+    
+
+});
+
 
 // /* GET home page. */
 // router.get('/', function(req, res, next) {
