@@ -13,7 +13,7 @@ avatar: String,
 desc: String,
 created:{
 type:Date,
-default:Date.now
+default:Date.now 
 }
 })
 module.exports.hayao = mongoose.model("hayao", hayaoSchema)
