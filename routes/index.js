@@ -41,6 +41,14 @@ router.post('/logreg', function (req, res, next) {
   })
 });
 
+/* POST logout. */
+router.post('/logout', function(req, res, next) {
+    req.session.destroy()
+    res.locals.user = null
+    res.redirect('/')
+});
+
+
 
 // /* GET home page. */
 // router.get('/', function(req, res, next) {
