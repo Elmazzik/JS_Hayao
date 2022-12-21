@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 router.get('/logreg', function(req, res, next) {
 res.render('logreg',{title: 'Вход'});
 });
+res.render('logreg',{error:null});
 
 /* POST login/registration page. */
 /* POST login/registration page. */
@@ -27,6 +28,7 @@ router.post('/logreg', function (req, res, next) {
         res.redirect('/')
       } else {
         res.render('logreg', { title: 'Вход' })
+        res.render('logreg',{error:"Пароль не верный"});
       }
     } else {
       var user = new User({ username: username, password: password })
