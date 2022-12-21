@@ -14,7 +14,7 @@ router.get("/:nick", function(req, res, next) {
 });
 
 /* Страница героев */
-router.get('/:nick', function(req, res, next) {
+  router.get('/:nick', checkAuth,function(req, res, next) {
     Hayao.findOne({nick:req.params.nick}, function(err,Hayao){
         if(err) return next(err)
         if(!Hayao) return next(new Error("Нет такого аниме на странице"))
