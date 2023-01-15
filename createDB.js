@@ -8,8 +8,8 @@ await client.connect();
 var database = client.db("hayao");
 database.dropDatabase()
 database = client.db("hayao");
-const cats = database.collection("anime");
-const result = await cats.insertMany(data);
+const hayaos = database.collection("hayaos");
+const result = await hayaos.insertMany(data);
 console.log(`${result.insertedCount} documents were inserted`);
 } finally {
 await client.close();

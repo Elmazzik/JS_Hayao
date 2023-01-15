@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/hayao')
-var cars = require('./routes/hayaos');
+var hayaos = require('./routes/hayaos');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -40,6 +40,7 @@ res.locals.message = err.message;
 res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  res.status(err.status || 500);
   res.render('error',
   {
     picture: "../images/error.png",
