@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Hayao = require("../models/hayao").Hayao
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -13,9 +14,9 @@ router.get("/:nick", function(req, res, next) {
 
 /* Страница героев */
 router.get('/:nick', function(req, res, next) {
-    Cat.findOne({nick:req.params.nick}, function(err,cat){
+    Hayao.findOne({nick:req.params.nick}, function(err,hayao){
         if(err) return next(err)
-        if(!cat) return next(new Error("Нет такого аниме на этой странице"))
+        if(!hayao) return next(new Error("Нет такого аниме на этой странице"))
         res.render('hayao', {
             title: hayao.title,
             picture: hayao.avatar,
